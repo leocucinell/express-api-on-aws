@@ -17,10 +17,10 @@ const createProduct = (req, res) => {
     });
     newProduct.save((err) => {
         if(err){
-            console.log(err)
+            console.log(err);
         }
     });
-    res.send('product successfully saved!')
+    res.send('product successfully saved!');
 }
 
 //GET route: /:id
@@ -41,8 +41,15 @@ const deleteProduct = (req, res) => {
 
 //GET route: /all
 const retrieveAllProducts = (req, res) => {
-    console.log('RETRIEVE ALL PRODUCTS');
-    res.send("Hello World!");
+    const mdbResponse = Product.find({}, (err, result) => {
+        if(err){
+            console.log('~~ ERROR RETRIEVING ALL ITEMS ~~');
+            console.log(err);
+        } else {
+            console.log(result);
+            res.send(result)
+        }
+    });
 }
 
 module.exports = {

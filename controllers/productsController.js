@@ -3,29 +3,33 @@
 */
 //TODO: Connect to the database
 
+//ALL ROUTES BEGIN WITH : /products
+
 //route: /new
-const createProduct = () => {
+const createProduct = (req, res) => {
     console.log('CREATE NEW PRODUCT');
 }
 
 //route: /:id
-const retrieveProduct = () => {
+const retrieveProduct = (req, res) => {
     console.log('RETRIEVE PRODUCT');
+    res.send('from retrieve single product route')
 }
 
 //route: /update/:id
-const updateProduct = () => {
+const updateProduct = (req, res) => {
     console.log('UPDATE PRODUCT');
 }
 
 //route: /delete/:id
-const deleteProduct = () => {
+const deleteProduct = (req, res) => {
     console.log('DELETE PRODUCT');
 }
 
 //route: /all
-const retrieveAllProducts = () => {
+const retrieveAllProducts = (req, res) => {
     console.log('RETRIEVE ALL PRODUCTS');
+    res.send("Hello World!");
 }
 
 module.exports = {

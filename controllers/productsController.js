@@ -1,32 +1,45 @@
 /*
     This file contains the main methods relating to products
 */
-//TODO: Connect to the database
+//Connect to the database
+const models = require('../model')
+//Specific models
+const Product = models.product
+
 
 //ALL ROUTES BEGIN WITH : /products
-
-//route: /new
+//POST route: /new 
 const createProduct = (req, res) => {
-    console.log('CREATE NEW PRODUCT');
+    console.log(req.body);
+    const newProduct = Product({
+        title: req.body.title,
+        description: req.body.description
+    });
+    newProduct.save((err) => {
+        if(err){
+            console.log(err)
+        }
+    });
+    res.send('product successfully saved!')
 }
 
-//route: /:id
+//GET route: /:id
 const retrieveProduct = (req, res) => {
     console.log('RETRIEVE PRODUCT');
     res.send('from retrieve single product route')
 }
 
-//route: /update/:id
+//PUT route: /update/:id
 const updateProduct = (req, res) => {
     console.log('UPDATE PRODUCT');
 }
 
-//route: /delete/:id
+//DELETE route: /delete/:id
 const deleteProduct = (req, res) => {
     console.log('DELETE PRODUCT');
 }
 
-//route: /all
+//GET route: /all
 const retrieveAllProducts = (req, res) => {
     console.log('RETRIEVE ALL PRODUCTS');
     res.send("Hello World!");

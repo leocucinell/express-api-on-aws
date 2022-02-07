@@ -9,10 +9,6 @@ const productSchema = new Schema({
     description: {
         type: String,
         required: true
-    },
-    published: {
-        type: Date,
-        default: Date.now,
     }
 }, {timestamps: true});
 

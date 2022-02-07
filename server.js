@@ -1,6 +1,8 @@
 const express = require('express');
 const routes = require('./routes');
 const cors = require('cors');
+require('dotenv').config();
+require('./config/db.connection');
 
 //TODO: DB Connection
 

@@ -10,7 +10,6 @@ const Product = models.product
 //ALL ROUTES BEGIN WITH : /products
 //POST route: /new 
 const createProduct = (req, res) => {
-    console.log(req.body);
     const newProduct = Product({
         title: req.body.title,
         description: req.body.description
@@ -36,12 +35,28 @@ const retrieveProduct = (req, res) => {
 
 //PUT route: /update/:id
 const updateProduct = (req, res) => {
-    console.log('UPDATE PRODUCT');
+    const itemResponse = Product.updateOne({id: req.params.id},{
+        title: req.body.title,
+        description: req.body.description
+    }, (err, result) => {
+        if(err){
+            console.log(err)
+        } else {
+            res.send(result)
+        }
+    })
 }
 
 //DELETE route: /delete/:id
 const deleteProduct = (req, res) => {
-    console.log('DELETE PRODUCT');
+    const itemResponse = Product.deleteOne({id: req.params.id}, (err, result) => {
+        if(err){
+            console.log(err);
+        } else {
+            //NOTE: Maybe send back the original item?
+            res.send(result);
+        }
+    })
 }
 
 //GET route: /all

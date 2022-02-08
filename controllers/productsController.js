@@ -24,7 +24,7 @@ const createProduct = (req, res) => {
 
 //GET route: /:id
 const retrieveProduct = (req, res) => {
-    const itemResponse = Product.find({id: req.params.id}, (err, result) => {
+    const itemResponse = Product.find({_id: req.params.id}, (err, result) => {
         if(err){
             console.log(err);
         } else {
@@ -35,7 +35,7 @@ const retrieveProduct = (req, res) => {
 
 //PUT route: /update/:id
 const updateProduct = (req, res) => {
-    const itemResponse = Product.updateOne({id: req.params.id},{
+    const itemResponse = Product.updateOne({_id: req.params.id},{
         title: req.body.title,
         description: req.body.description
     }, (err, result) => {
@@ -49,7 +49,7 @@ const updateProduct = (req, res) => {
 
 //DELETE route: /delete/:id
 const deleteProduct = (req, res) => {
-    const itemResponse = Product.deleteOne({id: req.params.id}, (err, result) => {
+    const itemResponse = Product.deleteOne({_id: req.params.id}, (err, result) => {
         if(err){
             console.log(err);
         } else {

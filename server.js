@@ -16,6 +16,7 @@ app.use(express.json());
 
 //routes
 app.use('/products', routes.products);
+app.use('/users', routes.users)
 
 //server bind
 app.listen(PORT, () => {

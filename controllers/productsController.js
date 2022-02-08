@@ -25,8 +25,13 @@ const createProduct = (req, res) => {
 
 //GET route: /:id
 const retrieveProduct = (req, res) => {
-    console.log('RETRIEVE PRODUCT');
-    res.send('from retrieve single product route')
+    const itemResponse = Product.find({id: req.params.id}, (err, result) => {
+        if(err){
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
 }
 
 //PUT route: /update/:id
@@ -46,8 +51,7 @@ const retrieveAllProducts = (req, res) => {
             console.log('~~ ERROR RETRIEVING ALL ITEMS ~~');
             console.log(err);
         } else {
-            console.log(result);
-            res.send(result)
+            res.send(result);
         }
     });
 }

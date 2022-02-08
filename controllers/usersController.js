@@ -54,6 +54,13 @@ const deleteUser = (req, res) => {
     });
 }
 
+//Sign a user in
+//POST route: /signin
+const logUserIn = (req, res) => {
+    const passedUsername = req.body.passedUsername;
+    const passedPassword = req.body.passedPassword;
+}
+
 //export methods
 module.exports = {
     createUser,

@@ -6,6 +6,7 @@ const models = require('../model');
 const User = models.user;
 
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 //controller methods:
 
 //POST route: /new
@@ -90,7 +91,29 @@ const logUserIn = (req, res) => {
                 }
                 if(result){
                     //result is true, log the user in / send JWT
-                    res.json({'message': 'User credentials correct!'});
+                    const accessToken = jwt.sign(
+                        {"username": passedUsername},
+                        process.env.ACCESS_TOKEN_SECRET,
+                        {expiresIn: '30s'}
+                    );
+                    const refreshToken = jwt.sign(
+                        {"username": passedUsername},
+                        process.env.REFRESH_TOKEN_SECRET,
+                        {expiresIn: '1d'}
+                    );
+                    //save the refresh token with the authed user
+                    const addRefreshToken = User.updateOne({username: passedUsername}, {refreshToken: refreshToken}, (err, result) => {
+                        if(err){
+                            console.log(err);
+                            return res.json({'message': 'unable to assign jwt'});
+                        }
+                    });
+                    //send back the access token and the refresh token
+                    res.json({
+                        'message': 'User credentials correct!',
+                        'accessToken': accessToken,
+                        'refreshToken': refreshToken
+                    });
                 } else {
                     res.json({'message': 'Incorrect user credentials'});
                 }

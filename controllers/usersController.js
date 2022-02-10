@@ -102,7 +102,10 @@ const logUserIn = (req, res) => {
                         {expiresIn: '1d'}
                     );
                     //save the refresh token with the authed user
-                    const addRefreshToken = User.updateOne({username: passedUsername}, {refreshToken: refreshToken}, (err, result) => {
+                    const addRefreshToken = User.updateOne(
+                        {username: passedUsername}, 
+                        {refreshToken: refreshToken, dateRefreshTokenAccessed: new Date().toLocaleDateString()}, 
+                        (err, result) => {
                         if(err){
                             console.log(err);
                             return res.json({'message': 'unable to assign jwt'});
@@ -120,6 +123,10 @@ const logUserIn = (req, res) => {
             });
         }
     });
+}
+
+const logUserOut = () => {
+    //This function edits the 
 }
 
 //export methods

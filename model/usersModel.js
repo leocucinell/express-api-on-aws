@@ -18,6 +18,11 @@ const UserSchema = new Schema({
         type: String,
         required: false,
         default: ''
+    },
+    dateRefreshTokenAccessed: {
+        type: Date,
+        required: false,
+        default: ''
     }
 });
 

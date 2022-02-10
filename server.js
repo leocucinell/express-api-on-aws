@@ -1,6 +1,7 @@
 const express = require('express');
 const routes = require('./routes');
 const cors = require('cors');
+const verifyJWT = require('./middleware/verifyJWT');
 require('dotenv').config();
 require('./config/db.connection');
 
@@ -14,9 +15,13 @@ app.use(express.json());
 
 //self-made middleware
 
-//routes
+//unprotected routes
+app.use('/users', routes.users);
+
+//protected routes
+app.use(verifyJWT);
 app.use('/products', routes.products);
-app.use('/users', routes.users)
+
 
 //server bind
 app.listen(PORT, () => {

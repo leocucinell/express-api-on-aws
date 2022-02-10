@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const ctrl = require('../controllers'); //methods relating to the products
 
+//middleware:
+const verifyJWT = require('../middleware/verifyJWT');
+
 //Route Resources:
 router.get('/all', ctrl.products.retrieveAllProducts);
 router.get('/:id', ctrl.products.retrieveProduct);

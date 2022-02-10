@@ -1,4 +1,5 @@
 module.exports = {
     products: require('./productRoutes'),
-    users: require('./userRoutes')
+    users: require('./userRoutes'),
+    refreshToken: require('./refreshRoutes')
 }

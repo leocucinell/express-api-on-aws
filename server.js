@@ -16,6 +16,7 @@ app.use(express.json());
 //self-made middleware
 
 //unprotected routes
+app.use('/refresh', routes.refreshToken);
 app.use('/users', routes.users);
 
 //protected routes

@@ -94,12 +94,12 @@ const logUserIn = (req, res) => {
                     const accessToken = jwt.sign(
                         {"username": passedUsername},
                         process.env.ACCESS_TOKEN_SECRET,
-                        {expiresIn: '30s'}
+                        {expiresIn: '1d'}
                     );
                     const refreshToken = jwt.sign(
                         {"username": passedUsername},
                         process.env.REFRESH_TOKEN_SECRET,
-                        {expiresIn: '1d'}
+                        {expiresIn: '1w'}
                     );
                     //save the refresh token with the authed user
                     const addRefreshToken = User.updateOne(

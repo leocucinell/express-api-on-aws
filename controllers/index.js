@@ -1,4 +1,5 @@
 module.exports = {
     products: require('./productsController'),
-    users: require('./usersController')
+    users: require('./usersController'),
+    refreshToken: require('./refreshTokenController')
 }

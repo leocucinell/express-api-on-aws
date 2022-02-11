@@ -22,18 +22,18 @@ const refreshAccessToken = (req, res) => {
         //user found with the token sent by client
         jwt.verify(userRefreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
             //decoded refresh token. have access to client username
-            if(err) return res.status(403).json({'message': 'token past expiration'});
+            if(err) return res.status(403).json({'message': 'token past expiration, relogin user'});
             //grant new access to token to user
             const accessToken = jwt.sign(
                 {"username": decoded.username}, //payload
                 process.env.ACCESS_TOKEN_SECRET,
-                {expiresIn: "1d"}
+                {expiresIn: "1d"} //access token lasts one day
             );
             //grant new refresh token to user
             const refreshToken = jwt.sign(
                 {"username": decoded.username}, //payload
                 process.env.REFRESH_TOKEN_SECRET,
-                {expiresIn: "1w"}
+                {expiresIn: "1w"} //refresh token lasts one week
             );
             const addRefreshToken = User.updateOne(
                 {username: decoded.username}, 
